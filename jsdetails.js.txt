@@ -1,0 +1,173 @@
+/* ============================================================
+   BODIMA – Property Details page
+   ============================================================ */
+(function () {
+  const wrap = qs('#detailWrap');
+  const similarGrid = qs('#similarGrid');
+  if (!wrap) return;
+
+  const id = getParams().get('id');
+  const p = id ? getPropertyById(id) : null;
+
+  /* ----- Not found ----- */
+  if (!p) {
+    wrap.innerHTML = `
+      <div class="empty-state show">
+        <div class="empty-icon"><i class="fa-solid fa-house-circle-exclamation"></i></div>
+        <h3>Listing not found</h3>
+        <p>This property may have been removed or the link is incorrect.</p>
+        <a href="properties.html" class="btn btn-primary">Browse All Properties</a>
+      </div>`;
+    qs('#similarSection')?.classList.add('hidden');
+    return;
+  }
+
+  /* ----- Breadcrumb ----- */
+  const crumb = qs('#crumb');
+  if (crumb) crumb.innerHTML = `
+    <li><a href="index.html">Home</a></li>
+    <li><a href="properties.html">Browse Properties</a></li>
+    <li><a href="properties.html?type=${encodeURIComponent(p.type)}">${p.type}</a></li>
+    <li>${escapeHTML(p.title)}</li>`;
+
+  /* ----- Main layout ----- */
+  const waText = encodeURIComponent(
+    `Hello ${p.owner}, I found your listing "${p.title}" (${formatLKR(p.price)}/month) on BODIMA. Is it still available?`);
+  const telHref = 'tel:' + p.phone.replace(/\s/g, '');
+  const mapQuery = encodeURIComponent(`${p.address}, ${p.city}, ${p.district}, Sri Lanka`);
+  const facils = p.facilities || [];
+  const fav = isFav(p.id);
+
+  wrap.innerHTML = `
+  <div class="detail-layout">
+    <div class="detail-main">
+      ${p.status === 'pending' ? `
+        <div class="pending-banner">
+          <i class="fa-regular fa-clock"></i>
+          <span>This listing is <strong>pending approval</strong>. It is visible in the directory but has not yet been reviewed by the BODIMA team.</span>
+        </div>` : ''}
+
+      <div class="gallery">
+        <div class="gallery-main"><img id="galleryMainImg" src="${p.images[0]}" alt="${escapeHTML(p.title)}" onerror="imgFail(this)"></div>
+        <div class="gallery-thumbs">
+          ${p.images.slice(0, 5).map((src, i) => `
+            <button class="gallery-thumb ${i === 0 ? 'active' : ''}" data-src="${src}" aria-label="Image ${i + 1}">
+              <img src="${src}" alt="" loading="lazy" onerror="imgFail(this)">
+            </button>`).join('')}
+        </div>
+      </div>
+
+      <div class="detail-head">
+        <h1>${escapeHTML(p.title)}</h1>
+        <div class="detail-sub">
+          <span class="prop-loc"><i class="fa-solid fa-location-dot"></i> ${escapeHTML(p.address)}, ${escapeHTML(p.city)}, ${escapeHTML(p.district)}</span>
+          ${p.verified && p.status !== 'pending' ? '<span class="badge badge-green"><i class="fa-solid fa-circle-check"></i> Verified Listing</span>' : ''}
+          ${p.available ? '<span class="badge badge-green"><i class="fa-solid fa-door-open"></i> Available Now</span>'
+                        : '<span class="badge badge-red">Currently Full</span>'}
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h3><i class="fa-solid fa-circle-info"></i> About this place</h3>
+        <p>${escapeHTML(p.description)}</p>
+        <div class="info-grid" style="margin-top:20px;">
+          <div class="info-item"><div class="lbl">Accommodation Type</div><div class="val">${escapeHTML(p.type)}</div></div>
+          <div class="info-item"><div class="lbl">Rooms Available</div><div class="val">${p.rooms}</div></div>
+          <div class="info-item"><div class="lbl">Gender Preference</div><div class="val">${genderLabel(p.gender)}</div></div>
+          <div class="info-item"><div class="lbl">District</div><div class="val">${escapeHTML(p.district)}</div></div>
+          <div class="info-item"><div class="lbl">City</div><div class="val">${escapeHTML(p.city)}</div></div>
+          <div class="info-item"><div class="lbl">Listed On</div><div class="val">${prettyDate(p.added)}</div></div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h3><i class="fa-solid fa-star"></i> Facilities & Amenities</h3>
+        <div class="facil-grid">
+          ${facils.map(f => `
+            <div class="facil-item"><i class="${FACILITY_ICONS[f] || 'fa-solid fa-circle-check'}"></i> ${escapeHTML(f)}</div>`).join('')}
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h3><i class="fa-solid fa-scroll"></i> Rules & Requirements</h3>
+        <ul class="rules-list">
+          ${(p.rules && p.rules.length ? p.rules : ['Standard house rules apply – confirm with the owner.'])
+            .map(r => `<li>${escapeHTML(r)}</li>`).join('')}
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h3><i class="fa-solid fa-map-location-dot"></i> Location</h3>
+        <div class="map-placeholder">
+          <i class="fa-solid fa-map-pin big"></i>
+          <p class="addr">${escapeHTML(p.address)}, ${escapeHTML(p.city)}</p>
+          <p class="hint">Live map preview coming soon — open the exact location on Google Maps below.</p>
+          <a class="btn btn-navy" target="_blank" rel="noopener"
+             href="https://www.google.com/maps/search/?api=1&query=${mapQuery}">
+            <i class="fa-brands fa-google"></i> Open in Google Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <aside class="detail-side">
+      <div class="price-card">
+        <div class="price-amount">${formatLKR(p.price)}</div>
+        <div class="price-unit">per month · LKR</div>
+        <div class="price-badges">
+          <span class="badge badge-orange">${escapeHTML(p.type)}</span>
+          <span class="badge badge-green">${p.rooms} room${p.rooms > 1 ? 's' : ''} free</span>
+        </div>
+        <div class="owner-box">
+          <span class="avatar-lg">${initialsOf(p.owner)}</span>
+          <div>
+            <div class="name">${escapeHTML(p.owner)}</div>
+            <div class="role">Property Owner · ${p.status === 'pending' ? 'Pending verification' : (p.verified ? 'Verified host' : 'Unverified host')}</div>
+          </div>
+        </div>
+        <div class="contact-btns">
+          <a class="btn btn-whatsapp btn-block" target="_blank" rel="noopener"
+             href="https://wa.me/${waDigits(p.whatsapp || p.phone)}?text=${waText}">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp Owner</a>
+          <a class="btn btn-navy btn-block" href="${telHref}"><i class="fa-solid fa-phone"></i> ${escapeHTML(p.phone)}</a>
+          <button class="btn btn-outline btn-block fav-btn ${fav ? 'active' : ''}" data-id="${p.id}">
+            <i class="${fav ? 'fa-solid' : 'fa-regular'} fa-heart"></i> ${fav ? 'Saved' : 'Save to Favourites'}
+          </button>
+          <button class="btn btn-ghost btn-block" id="copyLinkBtn"><i class="fa-solid fa-link"></i> Copy listing link</button>
+        </div>
+      </div>
+      <div class="safety-note">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>Safety tip: always visit the property and meet the owner in person before making any payment. BODIMA never asks for direct payments.</span>
+      </div>
+    </aside>
+  </div>`;
+
+  /* ----- Gallery thumb switching ----- */
+  const mainImg = qs('#galleryMainImg');
+  qsa('.gallery-thumb').forEach(t => t.addEventListener('click', () => {
+    mainImg.src = t.dataset.src;
+    qsa('.gallery-thumb').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+  }));
+
+  /* ----- Copy link ----- */
+  qs('#copyLinkBtn')?.addEventListener('click', () => {
+    const url = location.href;
+    if (navigator.clipboard) navigator.clipboard.writeText(url);
+    showToast('Listing link copied to clipboard', 'info');
+  });
+
+  /* ----- Similar properties (same district or type) ----- */
+  if (similarGrid) {
+    const similar = getPublicProperties()
+      .filter(x => x.id !== p.id && (x.district === p.district || x.type === p.type))
+      .sort((a, b) => ((b.district === p.district) ? 1 : 0) - ((a.district === p.district) ? 1 : 0))
+      .slice(0, 3);
+    if (similar.length) {
+      similarGrid.innerHTML = similar.map(renderPropCard).join('');
+      initReveal(similarGrid);
+    } else {
+      qs('#similarSection')?.classList.add('hidden');
+    }
+  }
+})();

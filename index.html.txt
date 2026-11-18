@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BODIMA – Find Your Perfect Place to Stay | Sri Lanka Accommodation Directory</title>
+  <meta name="description" content="Discover comfortable and affordable boarding places, rooms, annexes, hostels and apartments across Sri Lanka.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='85'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home">
+
+  <header id="siteHeader" class="site-header"></header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-inner">
+          <span class="hero-eyebrow"><i class="fa-solid fa-location-dot"></i> Sri Lanka's Smart Accommodation Directory</span>
+          <h1 class="hero-title">Find Your <span class="accent">Perfect Place</span> to Stay.</h1>
+          <p class="hero-sub">Discover comfortable and affordable boarding places around you — rooms, annexes, hostels and apartments across the island.</p>
+
+          <form class="hero-search" id="heroSearch" autocomplete="off">
+            <div class="search-field suggest-wrap">
+              <label for="heroLocation"><i class="fa-solid fa-location-dot"></i> Location</label>
+              <input type="text" id="heroLocation" data-suggest placeholder="City or district…">
+            </div>
+            <div class="search-field">
+              <label for="heroType"><i class="fa-solid fa-bed"></i> Accommodation Type</label>
+              <select id="heroType"><option value="">Any type</option></select>
+            </div>
+            <div class="search-field">
+              <label for="heroBudget"><i class="fa-solid fa-wallet"></i> Max Monthly Budget</label>
+              <select id="heroBudget">
+                <option value="">Any budget</option>
+                <option value="10000">Under Rs 10,000</option>
+                <option value="15000">Under Rs 15,000</option>
+                <option value="20000">Under Rs 20,000</option>
+                <option value="30000">Under Rs 30,000</option>
+                <option value="50000">Under Rs 50,000</option>
+                <option value="100000">Under Rs 100,000</option>
+              </select>
+            </div>
+            <button class="btn btn-primary search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+          </form>
+
+          <div class="hero-stats" id="heroStats"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURED ============ -->
+    <section class="section" id="featured">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Handpicked for you</span>
+          <h2>Featured Accommodation</h2>
+          <p>Premium boarding places, annexes and apartments loved by our community.</p>
+        </div>
+        <div class="prop-grid" id="featuredGrid"></div>
+        <div class="center-cta">
+          <a href="properties.html" class="btn btn-navy">Browse All Properties <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CATEGORIES ============ -->
+    <section class="section section-alt" id="categories">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Explore by type</span>
+          <h2>Browse by Category</h2>
+          <p>Whatever your budget or lifestyle, there's a place here for you.</p>
+        </div>
+        <div class="category-grid" id="categoryGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ POPULAR LOCATIONS ============ -->
+    <section class="section" id="locations">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Where students & workers stay</span>
+          <h2>Popular Locations</h2>
+          <p>Explore accommodation in Sri Lanka's most in-demand towns and cities.</p>
+        </div>
+        <div class="loc-grid" id="locationGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ WHY BODIMA ============ -->
+    <section class="section section-alt" id="why">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Built for your peace of mind</span>
+          <h2>Why Choose BODIMA?</h2>
+          <p>Everything you need to find a safe, comfortable and affordable stay.</p>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card reveal">
+            <div class="feature-icon"><i class="fa-solid fa-magnifying-glass-location"></i></div>
+            <h3>Easy Accommodation Search</h3>
+            <p>Filter by location, budget, type and facilities to find your ideal place in seconds.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon"><i class="fa-solid fa-shield-heart"></i></div>
+            <h3>Verified Listings</h3>
+            <p>Only listings that pass our review process carry the verified badge — so you always know.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon"><i class="fa-solid fa-tags"></i></div>
+            <h3>Affordable Options</h3>
+            <p>Compare monthly rents in LKR across categories and pick what fits your wallet.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon"><i class="fa-solid fa-phone-volume"></i></div>
+            <h3>Direct Owner Contact</h3>
+            <p>Call or WhatsApp owners directly — no agents, no commissions, no middlemen.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+            <h3>Location-Based Discovery</h3>
+            <p>Find stays near your university, workplace or favourite neighbourhood.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="cta-banner">
+          <div class="cta-content">
+            <h2>Have a Boarding Place?</h2>
+            <p>Reach thousands of people searching for accommodation every month — list it on BODIMA for free.</p>
+          </div>
+          <a href="post-property.html" class="btn btn-primary btn-lg"><i class="fa-solid fa-house-circle-check"></i> List Your Property</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="siteFooter" class="site-footer"></footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+/* ============================================================
+   BODIMA – Login & Register (frontend demo, LocalStorage only)
+   ============================================================ */
+(function () {
+  const emailOK = v => /^\S+@\S+\.\S+$/.test(v);
+  const phoneOK = v => /^(\+94|94|0)?7\d{8}$/.test(v.replace(/\s/g, ''));
+  const nextURL = getParams().get('next') || 'index.html';
+
+  function markInvalid(input, msg) {
+    const field = input.closest('.field');
+    if (!field) return;
+    field.classList.add('invalid');
+    const m = field.querySelector('.field-msg');
+    if (m && msg) m.textContent = msg;
+  }
+  function clearInvalid(input) { input.closest('.field')?.classList.remove('invalid'); }
+  qsa('input, select, textarea').forEach(el =>
+    el.addEventListener('input', () => clearInvalid(el)));
+
+  /* ----- LOGIN ----- */
+  const loginForm = qs('#loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = qs('#loginEmail').value.trim().toLowerCase();
+      const pass = qs('#loginPassword').value;
+      let ok = true;
+
+      if (!emailOK(email)) { markInvalid(qs('#loginEmail'), 'Please enter a valid email address.'); ok = false; }
+      if (!pass) { markInvalid(qs('#loginPassword'), 'Please enter your password.'); ok = false; }
+      if (!ok) return;
+
+      const user = getUsers().find(u => u.email.toLowerCase() === email);
+      if (!user || user.password !== pass) {
+        showToast('Invalid email or password. Please try again.', 'error');
+        return;
+      }
+      setSession(user);
+      showToast(`Welcome back, ${user.name.split(' ')[0]}!`);
+      setTimeout(() => (location.href = nextURL), 700);
+    });
+  }
+
+  /* ----- REGISTER ----- */
+  const regForm = qs('#registerForm');
+  if (regForm) {
+    regForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = qs('#regName').value.trim();
+      const email = qs('#regEmail').value.trim().toLowerCase();
+      const phone = qs('#regPhone').value.trim();
+      const pass = qs('#regPassword').value;
+      const confirm = qs('#regConfirm').value;
+      const role = (qs('input[name="regRole"]:checked') || {}).value;
+      let ok = true;
+
+      if (name.length < 3) { markInvalid(qs('#regName'), 'Please enter your full name.'); ok = false; }
+      if (!emailOK(email)) { markInvalid(qs('#regEmail'), 'Please enter a valid email address.'); ok = false; }
+      if (!phoneOK(phone)) { markInvalid(qs('#regPhone'), 'Enter a valid Sri Lankan mobile (e.g. 0771234567).'); ok = false; }
+      if (pass.length < 6) { markInvalid(qs('#regPassword'), 'Password must be at least 6 characters.'); ok = false; }
+      if (confirm !== pass) { markInvalid(qs('#regConfirm'), 'Passwords do not match.'); ok = false; }
+      if (!ok) return;
+
+      const users = getUsers();
+      if (users.some(u => u.email.toLowerCase() === email)) {
+        showToast('An account with this email already exists. Please login.', 'error');
+        return;
+      }
+
+      const user = {
+        id: 'u' + Date.now(), name, email, phone, password: pass, role,
+        joined: new Date().toISOString().slice(0, 10)
+      };
+      users.push(user);
+      store.set(USERS_KEY, users);
+      setSession(user);
+      showToast('Account created successfully. Welcome to BODIMA!');
+      setTimeout(() => (location.href = 'dashboard.html'), 700);
+    });
+  }
+})();

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us – BODIMA</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='85'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="contact">
+
+  <header id="siteHeader" class="site-header"></header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <ul class="breadcrumb"><li><a href="index.html">Home</a></li><li>Contact Us</li></ul>
+        <h1>Contact Us</h1>
+        <p>Questions about a listing, your account, or listing your property? We're here to help.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container contact-layout">
+
+        <!-- Info cards -->
+        <div>
+          <div class="contact-info-card">
+            <i class="fa-solid fa-location-dot"></i>
+            <div><h4>Head Office</h4><p>No. 42, Ward Place, Colombo 07, Sri Lanka</p></div>
+          </div>
+          <div class="contact-info-card">
+            <i class="fa-solid fa-phone"></i>
+            <div><h4>Hotline</h4><p>+94 11 234 5678 (Mon – Sat, 8.30 AM – 6 PM)</p></div>
+          </div>
+          <div class="contact-info-card">
+            <i class="fa-solid fa-envelope"></i>
+            <div><h4>Email</h4><p>hello@bodima.lk · support@bodima.lk</p></div>
+          </div>
+          <div class="contact-info-card">
+            <i class="fa-brands fa-whatsapp"></i>
+            <div><h4>WhatsApp</h4><p>+94 77 234 5678 — quick replies during office hours</p></div>
+          </div>
+          <div class="map-placeholder" style="margin-top:8px;">
+            <i class="fa-solid fa-map-pin big"></i>
+            <p class="addr">BODIMA HQ – Colombo 07</p>
+            <p class="hint">Live map preview coming soon.</p>
+            <a class="btn btn-navy" target="_blank" rel="noopener"
+               href="https://www.google.com/maps/search/?api=1&query=Ward%20Place%2C%20Colombo%2007%2C%20Sri%20Lanka">
+              <i class="fa-brands fa-google"></i> Open in Google Maps</a>
+          </div>
+        </div>
+
+        <!-- Contact form -->
+        <div>
+          <div class="form-card" style="padding:32px;">
+            <h2 style="font-size:22px;margin-bottom:6px;">Send us a message</h2>
+            <p style="color:var(--muted);font-size:14px;margin-bottom:22px;">We usually reply within 24 hours.</p>
+            <form id="contactForm" novalidate>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="cName">Full Name *</label>
+                  <input type="text" id="cName" placeholder="Your name">
+                  <p class="field-msg">Please enter your name.</p>
+                </div>
+                <div class="field">
+                  <label for="cEmail">Email Address *</label>
+                  <input type="email" id="cEmail" placeholder="you@example.com">
+                  <p class="field-msg">Please enter a valid email.</p>
+                </div>
+                <div class="field span-2">
+                  <label for="cSubject">Subject *</label>
+                  <input type="text" id="cSubject" placeholder="e.g. Question about a listing">
+                  <p class="field-msg">Please enter a subject.</p>
+                </div>
+                <div class="field span-2">
+                  <label for="cMessage">Message *</label>
+                  <textarea id="cMessage" placeholder="How can we help you?"></textarea>
+                  <p class="field-msg">Message must be at least 10 characters.</p>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg">
+                <i class="fa-solid fa-paper-plane"></i> Send Message</button>
+              <p class="form-note"><i class="fa-solid fa-circle-info"></i> Demo note: messages are stored locally in your browser and are not sent to a server.</p>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Quick answers</span>
+          <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>Is BODIMA free to use?</summary>
+            <p>Yes. Browsing, contacting owners and posting your property are all completely free. BODIMA never charges commissions.</p>
+          </details>
+          <details>
+            <summary>What does "Verified" mean on a listing?</summary>
+            <p>Only listings whose details (photos, price, address) have been checked by the BODIMA team carry the verified badge. Listings without the badge are still shown but marked unverified.</p>
+          </details>
+          <details>
+            <summary>Why does my new listing show "Pending Approval"?</summary>
+            <p>New submissions appear immediately in the directory but remain marked as pending until our team reviews them. This keeps the platform trustworthy for everyone.</p>
+          </details>
+          <details>
+            <summary>How do I contact a property owner?</summary>
+            <p>Open any listing and use the "WhatsApp Owner" or call button. All contact happens directly between you and the owner.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="siteFooter" class="site-footer"></footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/contact.js"></script>
+</body>
+</html>

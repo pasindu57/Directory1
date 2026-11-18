@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Details – BODIMA</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='85'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="properties">
+
+  <header id="siteHeader" class="site-header"></header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <ul class="breadcrumb" id="crumb"></ul>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <div class="container" id="detailWrap">
+        <!-- Injected by js/details.js -->
+        <div class="prop-grid">
+          <div class="skel-card"><div class="skel skel-img" style="height:380px"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="similarSection">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Keep exploring</span>
+          <h2>Similar Properties</h2>
+          <p>More places you might like, in the same area or category.</p>
+        </div>
+        <div class="prop-grid" id="similarGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="siteFooter" class="site-footer"></footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/details.js"></script>
+</body>
+</html>

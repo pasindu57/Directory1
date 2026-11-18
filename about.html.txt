@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us – BODIMA</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='85'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="about">
+
+  <header id="siteHeader" class="site-header"></header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <ul class="breadcrumb"><li><a href="index.html">Home</a></li><li>About Us</li></ul>
+        <h1>About BODIMA</h1>
+        <p>We're on a mission to make finding a place to stay in Sri Lanka simple, safe and stress-free.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container about-grid">
+        <div class="about-copy">
+          <span class="eyebrow" style="color:var(--orange-dark);font-weight:600;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;">Our Story</span>
+          <h2>Born from a real struggle</h2>
+          <p>Every year, hundreds of thousands of students and young workers move to cities like Colombo, Kandy and Galle — and every year, finding a decent boarding place means scrolling through dozens of Facebook groups, calling unknown numbers and visiting places that look nothing like the photos.</p>
+          <p>BODIMA was created to fix that. We bring boarding places, single rooms, annexes, hostels and apartments together in one trusted directory — with clear photos, transparent LKR pricing, honest facility lists and direct owner contact.</p>
+          <p>No agents. No commissions. Just people finding homes.</p>
+          <a href="properties.html" class="btn btn-primary" style="margin-top:10px;">Start Exploring <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=900&q=60" alt="Comfortable boarding room" onerror="imgFail(this)">
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <div class="stats-band">
+          <div><div class="num stat-num" data-count="1200">0</div><div class="lbl">Listings Published</div></div>
+          <div><div class="num stat-num" data-count="8">0</div><div class="lbl">Districts Covered</div></div>
+          <div><div class="num stat-num" data-count="450">0</div><div class="lbl">Registered Owners</div></div>
+          <div><div class="num stat-num" data-count="15000">0</div><div class="lbl">Monthly Searches</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">What drives us</span>
+          <h2>Our Values</h2>
+        </div>
+        <div class="feature-grid" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr));">
+          <div class="value-card reveal"><i class="fa-solid fa-handshake"></i><h3>Trust First</h3><p>Verified badges are earned, never bought. We review every listing before it's fully trusted.</p></div>
+          <div class="value-card reveal"><i class="fa-solid fa-scale-balanced"></i><h3>Zero Commission</h3><p>Tenants pay owners directly. We never insert ourselves into your transaction.</p></div>
+          <div class="value-card reveal"><i class="fa-solid fa-heart"></i><h3>Community Driven</h3><p>Built with feedback from students, guardians and boarding owners across the island.</p></div>
+          <div class="value-card reveal"><i class="fa-solid fa-lightbulb"></i><h3>Radical Simplicity</h3><p>Search, filter, contact. Finding a stay shouldn't take weeks — it should take minutes.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">The people behind BODIMA</span>
+          <h2>Meet the Team</h2>
+        </div>
+        <div class="team-grid">
+          <div class="team-card reveal">
+            <div class="avatar-photo">DP</div>
+            <h3>Dinesh Perera</h3>
+            <div class="role">Founder & CEO</div>
+            <p>Former university student who once visited 14 boarding places in one weekend — and decided there had to be a better way.</p>
+          </div>
+          <div class="team-card reveal">
+            <div class="avatar-photo">SF</div>
+            <h3>Shani Fernando</h3>
+            <div class="role">Head of Listings</div>
+            <p>Leads the verification team, making sure every photo and price you see is honest and current.</p>
+          </div>
+          <div class="team-card reveal">
+            <div class="avatar-photo">TR</div>
+            <h3>Tharindu Rajapaksha</h3>
+            <div class="role">Product Engineer</div>
+            <p>Obsessed with fast search, clean design and a platform that works beautifully on any phone.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <div class="cta-banner">
+          <div class="cta-content">
+            <h2>Ready to find your place?</h2>
+            <p>Join thousands of students, workers and travellers who found home with BODIMA.</p>
+          </div>
+          <a href="properties.html" class="btn btn-primary btn-lg">Browse Properties <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="siteFooter" class="site-footer"></footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

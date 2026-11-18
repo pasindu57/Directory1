@@ -1,0 +1,249 @@
+/* ============================================================
+   BODIMA – Sample Data & Shared Constants (DEMO ONLY)
+   All data lives in the browser. There is NO real backend.
+   ============================================================ */
+
+// Unsplash image helper
+const IMG = (id, w = 900) =>
+  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=60`;
+
+// Build an image set from several Unsplash photo IDs
+const P = (...ids) => ids.map(id => IMG(id));
+
+// Fallback image if Unsplash fails to load
+const FALLBACK_IMG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Crect width='800' height='500' fill='%23E9EEF5'/%3E%3Cpath d='M330 270l70-62 70 62v80h-140z' fill='none' stroke='%23142B4A' stroke-width='16' stroke-linejoin='round'/%3E%3Ccircle cx='400' cy='255' r='20' fill='%23FF8A35'/%3E%3C/svg%3E";
+
+function imgFail(el) { el.onerror = null; el.src = FALLBACK_IMG; }
+
+/* ---------- Taxonomies ---------- */
+const CATEGORIES = ['Boys Boarding', 'Girls Boarding', 'Mixed Boarding', 'Single Room', 'Annex', 'Hostel', 'Apartment'];
+
+const CATEGORY_ICONS = {
+  'Boys Boarding': 'fa-solid fa-person',
+  'Girls Boarding': 'fa-solid fa-person-dress',
+  'Mixed Boarding': 'fa-solid fa-people-roof',
+  'Single Room': 'fa-solid fa-door-open',
+  'Annex': 'fa-solid fa-house-chimney',
+  'Hostel': 'fa-solid fa-building',
+  'Apartment': 'fa-solid fa-city'
+};
+
+const FACILITIES = ['WiFi', 'Attached Bathroom', 'Hot Water', 'Meals Included', 'Laundry', 'Parking',
+  'CCTV Security', 'Kitchen Access', 'Air Conditioning', 'Ceiling Fan', 'Fully Furnished', 'Study Desk'];
+
+const FACILITY_ICONS = {
+  'WiFi': 'fa-solid fa-wifi', 'Attached Bathroom': 'fa-solid fa-bath',
+  'Hot Water': 'fa-solid fa-temperature-arrow-up', 'Meals Included': 'fa-solid fa-utensils',
+  'Laundry': 'fa-solid fa-shirt', 'Parking': 'fa-solid fa-square-parking',
+  'CCTV Security': 'fa-solid fa-video', 'Kitchen Access': 'fa-solid fa-kitchen-set',
+  'Air Conditioning': 'fa-solid fa-snowflake', 'Ceiling Fan': 'fa-solid fa-fan',
+  'Fully Furnished': 'fa-solid fa-couch', 'Study Desk': 'fa-solid fa-book-open'
+};
+
+const DISTRICTS = ['Colombo', 'Gampaha', 'Kandy', 'Kalutara', 'Kurunegala', 'Galle', 'Matara', 'Jaffna'];
+
+const CITIES_BY_DISTRICT = {
+  'Colombo': ['Colombo 03', 'Colombo 05', 'Colombo 07', 'Nugegoda', 'Maharagama', 'Moratuwa', 'Dehiwala', 'Rajagiriya', 'Battaramulla', 'Malabe', 'Kirulapone', 'Homagama'],
+  'Gampaha': ['Negombo', 'Wattala', 'Kelaniya', 'Ja-Ela', 'Kadawatha', 'Gampaha Town'],
+  'Kandy': ['Kandy', 'Peradeniya', 'Katugastota'],
+  'Kalutara': ['Kalutara', 'Panadura', 'Horana'],
+  'Kurunegala': ['Kurunegala Town', 'Kuliyapitiya'],
+  'Galle': ['Galle Fort Area', 'Hikkaduwa', 'Ambalangoda'],
+  'Matara': ['Matara Town', 'Weligama'],
+  'Jaffna': ['Jaffna Town', 'Chunnakam']
+};
+
+const findDistrictByCity = (city) =>
+  Object.keys(CITIES_BY_DISTRICT).find(d => CITIES_BY_DISTRICT[d].includes(city)) || null;
+
+/* ---------- Popular locations shown on the homepage ---------- */
+const LOCATIONS = [
+  { name: 'Colombo', img: '1600585154340-be6161a56a0c' },
+  { name: 'Kandy', img: '1600596542815-ffad4c1539a9' },
+  { name: 'Nugegoda', img: '1522708323590-d24dbb6b0267' },
+  { name: 'Moratuwa', img: '1560448204-e02f11c3d0e2' },
+  { name: 'Malabe', img: '1502672260266-1c1ef2d93688' },
+  { name: 'Maharagama', img: '1512918728675-ed5a9ecdebfd' },
+  { name: 'Negombo', img: '1493809842364-78817add7ffb' },
+  { name: 'Kelaniya', img: '1586023492125-27b2c045efd7' }
+];
+
+/* ---------- Sample listings (realistic Sri Lankan demo data) ---------- */
+const SAMPLE_PROPERTIES = [
+  {
+    id: 'p01', title: 'Lotus Girls Boarding – Nugegoda', type: 'Girls Boarding',
+    district: 'Colombo', city: 'Nugegoda', address: 'No. 24/3, Old Kesbewa Road, Nugegoda',
+    price: 15000, rooms: 6, gender: 'Female',
+    facilities: ['WiFi', 'Meals Included', 'Laundry', 'Attached Bathroom', 'CCTV Security', 'Study Desk'],
+    description: 'A well-maintained purpose-built girls boarding just 5 minutes from Nugegoda junction. Three home-cooked meals are provided daily, and each resident gets a dedicated study desk with wardrobe space. Ideal for university students and young professionals working in Colombo.',
+    rules: ['Curfew at 10.30 PM', 'Visitors allowed in the common area only', 'No smoking or alcohol on premises', 'Meals served at fixed times'],
+    owner: 'Kamala Perera', phone: '+94 77 123 4567', whatsapp: '94771234567',
+    images: P('1502672260266-1c1ef2d93688', '1560185127-6ed189bf02f4', '1616594039964-ae9021a400a0', '1493663284031-b7e3aefcae8e'),
+    featured: true, verified: true, available: true, added: '2026-01-26'
+  },
+  {
+    id: 'p02', title: 'Metro Boys Boarding – Malabe (Near SLIIT)', type: 'Boys Boarding',
+    district: 'Colombo', city: 'Malabe', address: 'No. 8, New Kandy Road, Malabe',
+    price: 12500, rooms: 8, gender: 'Male',
+    facilities: ['WiFi', 'Ceiling Fan', 'Study Desk', 'Kitchen Access', 'Parking', 'Laundry'],
+    description: 'Popular boys boarding within walking distance of SLIIT. High-speed fibre WiFi, a shared self-cooking kitchen and a quiet study room make it a favourite among students. Bicycle and motorbike parking available on site.',
+    rules: ['Overnight leave requires prior notice', 'Shared kitchen – clean after use', 'No loud music after 10 PM'],
+    owner: 'Nuwan Fernando', phone: '+94 76 234 5678', whatsapp: '94762345678',
+    images: P('1522708323590-d24dbb6b0267', '1595526114035-0d45ed16cfbf', '1631049307264-da0ec9b70385', '1567016432779-094069958ea5'),
+    featured: true, verified: true, available: true, added: '2026-01-22'
+  },
+  {
+    id: 'p03', title: 'Havelock City Mixed Boarding', type: 'Mixed Boarding',
+    district: 'Colombo', city: 'Colombo 05', address: 'No. 112, Havelock Road, Colombo 05',
+    price: 18000, rooms: 4, gender: 'Any',
+    facilities: ['WiFi', 'Attached Bathroom', 'Hot Water', 'Ceiling Fan', 'CCTV Security', 'Kitchen Access'],
+    description: 'Modern mixed boarding on Havelock Road with attached bathrooms in every room. Walking distance to banks, cafés and bus routes into the city centre. Perfect for young professionals working in Colombo 03–07.',
+    rules: ['Common areas must be kept tidy', 'Guests allowed until 9 PM only', 'Rent payable before the 5th of each month'],
+    owner: 'Sanduni Jayawardena', phone: '+94 71 345 6789', whatsapp: '94713456789',
+    images: P('1560448204-e02f11c3d0e2', '1586023492125-27b2c045efd7', '1600607687920-4e2a09cf159d', '1560448075-bb485b067938'),
+    featured: false, verified: true, available: true, added: '2026-01-18'
+  },
+  {
+    id: 'p04', title: 'Cozy Single Room – Rajagiriya', type: 'Single Room',
+    district: 'Colombo', city: 'Rajagiriya', address: 'No. 45, Sri Jayawardenepura Road, Rajagiriya',
+    price: 22000, rooms: 2, gender: 'Any',
+    facilities: ['WiFi', 'Attached Bathroom', 'Air Conditioning', 'Fully Furnished', 'Hot Water'],
+    description: 'Fully furnished A/C single rooms in a quiet lane off Rajagiriya. Each room comes with a double bed, wardrobe, study table and private bathroom. Utilities and WiFi included in the rent.',
+    rules: ['Suitable for a single occupant only', 'No cooking inside rooms', 'Quiet hours after 11 PM'],
+    owner: 'Ruwan Wickramasinghe', phone: '+94 77 456 7890', whatsapp: '94774567890',
+    images: P('1616594039964-ae9021a400a0', '1567016432779-094069958ea5', '1502672260266-1c1ef2d93688', '1493663284031-b7e3aefcae8e'),
+    featured: true, verified: true, available: true, added: '2026-01-30'
+  },
+  {
+    id: 'p05', title: 'Garden Annex – Battaramulla', type: 'Annex',
+    district: 'Colombo', city: 'Battaramulla', address: 'No. 17, Pahalawela Road, Battaramulla',
+    price: 35000, rooms: 1, gender: 'Any',
+    facilities: ['WiFi', 'Air Conditioning', 'Fully Furnished', 'Parking', 'Kitchen Access', 'Hot Water'],
+    description: 'A private one-bedroom annex with its own entrance, opening onto a landscaped garden. Fully furnished with a modern kitchenette – ideal for a couple or an expat professional. One car parking slot included.',
+    rules: ['No parties or events', 'Pets not allowed', 'Minimum 3-month stay preferred'],
+    owner: 'Dilani Gunawardena', phone: '+94 78 567 8901', whatsapp: '94785678901',
+    images: P('1600566753086-00f18fb6b3ea', '1522771739844-6a9f6d5f14af', '1586023492125-27b2c045efd7', '1600607687920-4e2a09cf159d'),
+    featured: true, verified: true, available: true, added: '2026-01-14'
+  },
+  {
+    id: 'p06', title: 'Peradeniya Student Hostel', type: 'Hostel',
+    district: 'Kandy', city: 'Peradeniya', address: 'No. 3, Galaha Road, Peradeniya',
+    price: 9500, rooms: 10, gender: 'Male',
+    facilities: ['WiFi', 'Meals Included', 'Laundry', 'Study Desk', 'Ceiling Fan', 'CCTV Security'],
+    description: 'Trusted boys hostel opposite the Peradeniya University entrance, popular with engineering and agriculture students. Includes breakfast and dinner, weekly laundry and a 24-hour study hall.',
+    rules: ['Curfew at 11 PM', 'Meals at fixed canteen times', 'Registration with guardian contact required'],
+    owner: 'Sampath Ekanayake', phone: '+94 81 223 4567', whatsapp: '94812234567',
+    images: P('1631049307264-da0ec9b70385', '1595526114035-0d45ed16cfbf', '1560185893-a55cbc8c57e8', '1522708323590-d24dbb6b0267'),
+    featured: false, verified: true, available: true, added: '2025-12-28'
+  },
+  {
+    id: 'p07', title: 'Luxury 2-Bedroom Apartment – Colombo 03', type: 'Apartment',
+    district: 'Colombo', city: 'Colombo 03', address: 'Level 9, Residencies, Glen Aber Place, Colombo 03',
+    price: 85000, rooms: 1, gender: 'Any',
+    facilities: ['WiFi', 'Air Conditioning', 'Fully Furnished', 'Parking', 'Attached Bathroom', 'Hot Water', 'CCTV Security'],
+    description: 'Fully furnished 2-bedroom apartment on the 9th floor with city and partial ocean views. Includes gym and rooftop pool access, 24/7 security and a covered parking bay. Serviced weekly housekeeping optional.',
+    rules: ['No smoking inside the unit', 'Building rules apply for common areas', 'One month advance + one month deposit'],
+    owner: 'Ashen Bandara', phone: '+94 77 678 9012', whatsapp: '94776789012',
+    images: P('1560448204-e02f11c3d0e2', '1600607687920-4e2a09cf159d', '1560448075-bb485b067938', '1586023492125-27b2c045efd7'),
+    featured: true, verified: true, available: true, added: '2026-01-25'
+  },
+  {
+    id: 'p08', title: 'Sahan Girls Boarding – Maharagama', type: 'Girls Boarding',
+    district: 'Colombo', city: 'Maharagama', address: 'No. 61/A, High Level Road, Maharagama',
+    price: 13000, rooms: 5, gender: 'Female',
+    facilities: ['WiFi', 'Meals Included', 'Ceiling Fan', 'Laundry', 'CCTV Security'],
+    description: 'Family-run girls boarding on High Level Road, 3 minutes from Maharagama junction. Home-cooked Sri Lankan meals, a warden on site and CCTV-monitored premises ensure a safe, comfortable stay.',
+    rules: ['Curfew at 10 PM', 'No male visitors upstairs', 'Laundry collected every Monday & Thursday'],
+    owner: 'Nimali De Silva', phone: '+94 70 789 0123', whatsapp: '94707890123',
+    images: P('1560185893-a55cbc8c57e8', '1616594039964-ae9021a400a0', '1560185127-6ed189bf02f4', '1595526114035-0d45ed16cfbf'),
+    featured: false, verified: true, available: true, added: '2025-12-20'
+  },
+  {
+    id: 'p09', title: 'Wave Boys Boarding – Moratuwa (Near UoM)', type: 'Boys Boarding',
+    district: 'Colombo', city: 'Moratuwa', address: 'No. 29, De Soysa Road, Moratuwa',
+    price: 11000, rooms: 7, gender: 'Male',
+    facilities: ['WiFi', 'Study Desk', 'Kitchen Access', 'Ceiling Fan', 'Parking'],
+    description: 'Budget-friendly boys boarding 10 minutes from the University of Moratuwa gate. Self-cooking facilities, bicycle parking and a spacious common room with table tennis.',
+    rules: ['Kitchen open until 10 PM', 'Bicycles parked in the rear yard only', 'Rent due on the 1st'],
+    owner: 'Chathura Weerasinghe', phone: '+94 76 890 1234', whatsapp: '94768901234',
+    images: P('1595526114035-0d45ed16cfbf', '1631049307264-da0ec9b70385', '1567016432779-094069958ea5', '1560185893-a55cbc8c57e8'),
+    featured: false, verified: false, available: true, added: '2026-01-10'
+  },
+  {
+    id: 'p10', title: 'Quiet Single Room – Dehiwala', type: 'Single Room',
+    district: 'Colombo', city: 'Dehiwala', address: 'No. 7, Hill Street, Dehiwala',
+    price: 16500, rooms: 3, gender: 'Female',
+    facilities: ['WiFi', 'Attached Bathroom', 'Hot Water', 'Ceiling Fan', 'Study Desk'],
+    description: 'Bright single rooms in a calm residential lane near Dehiwala zoo. Suitable for female students or professionals; zoo-side walking track and Dehiwala station are both within 10 minutes on foot.',
+    rules: ['Curfew at 10.30 PM', 'Visitors in the lobby only', 'No overnight guests'],
+    owner: 'Irushi Rajapaksha', phone: '+94 71 901 2345', whatsapp: '94719012345',
+    images: P('1493663284031-b7e3aefcae8e', '1560185127-6ed189bf02f4', '1502672260266-1c1ef2d93688', '1616594039964-ae9021a400a0'),
+    featured: false, verified: true, available: true, added: '2025-12-15'
+  },
+  {
+    id: 'p11', title: 'Hillside Annex – Kandy', type: 'Annex',
+    district: 'Kandy', city: 'Kandy', address: 'No. 88, Mulgampola Road, Kandy',
+    price: 30000, rooms: 1, gender: 'Any',
+    facilities: ['WiFi', 'Fully Furnished', 'Parking', 'Hot Water', 'Kitchen Access'],
+    description: 'Charming annex on the Kandy hillside with panoramic views of the lake and temple. Ten minutes by tuk-tuk to the city centre. Comes fully furnished with a private veranda.',
+    rules: ['Suitable for max 2 occupants', 'No smoking indoors', 'Deposit of one month required'],
+    owner: 'Menaka Herath', phone: '+94 81 334 5678', whatsapp: '94813345678',
+    images: P('1522771739844-6a9f6d5f14af', '1600566753086-00f18fb6b3ea', '1586023492125-27b2c045efd7', '1522708323590-d24dbb6b0267'),
+    featured: false, verified: true, available: true, added: '2026-01-05'
+  },
+  {
+    id: 'p12', title: 'City Lodge Hostel – Maradana', type: 'Hostel',
+    district: 'Colombo', city: 'Colombo 10', address: 'No. 140, Maradana Road, Colombo 10',
+    price: 8000, rooms: 12, gender: 'Male',
+    facilities: ['WiFi', 'Ceiling Fan', 'Laundry', 'Kitchen Access'],
+    description: 'The most affordable beds in Colombo. Dormitory-style hostel near Maradana station – perfect for technical college students and apprentices. Pay weekly or monthly.',
+    rules: ['Lights out at 11 PM', 'Personal lockers provided – keep locked', 'Weekly payment option available'],
+    owner: 'Tharindu Silva', phone: '+94 75 012 3456', whatsapp: '94750123456',
+    images: P('1631049307264-da0ec9b70385', '1560185893-a55cbc8c57e8', '1595526114035-0d45ed16cfbf', '1567016432779-094069958ea5'),
+    featured: false, verified: false, available: true, added: '2025-11-30'
+  },
+  {
+    id: 'p13', title: 'Sea Breeze Apartment – Negombo', type: 'Apartment',
+    district: 'Gampaha', city: 'Negombo', address: 'No. 5, Lewis Place, Negombo',
+    price: 65000, rooms: 2, gender: 'Any',
+    facilities: ['WiFi', 'Air Conditioning', 'Fully Furnished', 'Parking', 'Hot Water', 'Attached Bathroom'],
+    description: 'Beachside 2-bedroom apartment on Lewis Place, 200 m from Negombo lagoon. Fully furnished with modern appliances – popular with expats and airline crews. Monthly and weekly rates available.',
+    rules: ['No parties', 'Careful with beachside sand in rooms :)', '30-day notice for vacating'],
+    owner: 'Sampath Ekanayake', phone: '+94 77 111 2223', whatsapp: '94771112223',
+    images: P('1600607687920-4e2a09cf159d', '1560448075-bb485b067938', '1600566753086-00f18fb6b3ea', '1560448204-e02f11c3d0e2'),
+    featured: true, verified: true, available: true, added: '2026-01-20'
+  },
+  {
+    id: 'p14', title: 'Riverside Mixed Boarding – Kelaniya', type: 'Mixed Boarding',
+    district: 'Gampaha', city: 'Kelaniya', address: 'No. 12, Temple Road, Kelaniya',
+    price: 14000, rooms: 6, gender: 'Any',
+    facilities: ['WiFi', 'Meals Included', 'Laundry', 'CCTV Security', 'Ceiling Fan'],
+    description: 'Peaceful mixed boarding near the Kelaniya temple with meals included. Frequent buses to Colombo and Kadawatha; ideal for students of University of Kelaniya and workers alike.',
+    rules: ['Curfew at 10.30 PM', 'Separate wings for gents and ladies', 'Meals at 7.30 AM / 1 PM / 8 PM'],
+    owner: 'Nuwan Fernando', phone: '+94 76 222 3334', whatsapp: '94762223334',
+    images: P('1560185893-a55cbc8c57e8', '1631049307264-da0ec9b70385', '1560185127-6ed189bf02f4', '1595526114035-0d45ed16cfbf'),
+    featured: false, verified: true, available: true, added: '2026-01-16'
+  },
+  {
+    id: 'p15', title: 'Fort View Girls Boarding – Galle', type: 'Girls Boarding',
+    district: 'Galle', city: 'Galle Fort Area', address: 'No. 22, Lighthouse Street, Galle',
+    price: 12000, rooms: 4, gender: 'Female',
+    facilities: ['WiFi', 'Meals Included', 'Attached Bathroom', 'Hot Water', 'Laundry'],
+    description: 'A restored colonial-era home turned girls boarding inside Galle Fort. Walk to cafés, the lighthouse and government offices. Meals included and a house mother on premises.',
+    rules: ['Curfew at 10 PM', 'Visitors in the courtyard only', 'Quiet after 9.30 PM'],
+    owner: 'Kamala Perera', phone: '+94 91 123 4567', whatsapp: '94911234567',
+    images: P('1493663284031-b7e3aefcae8e', '1616594039964-ae9021a400a0', '1502672260266-1c1ef2d93688', '1560185893-a55cbc8c57e8'),
+    featured: false, verified: false, available: true, added: '2025-12-10'
+  },
+  {
+    id: 'p16', title: 'Bright Single Room – Wattala', type: 'Single Room',
+    district: 'Gampaha', city: 'Wattala', address: 'No. 9, Negombo Road, Wattala',
+    price: 18000, rooms: 2, gender: 'Male',
+    facilities: ['WiFi', 'Fully Furnished', 'Ceiling Fan', 'Parking'],
+    description: 'Two furnished single rooms above a quiet shop line on Negombo Road. Direct buses to Colombo every 5 minutes. Motorbike parking available behind the building.',
+    rules: ['Single occupant per room', 'No cooking in rooms – pantry downstairs', 'Rent due before the 3rd'],
+    owner: 'Ruwan Wickramasinghe', phone: '+94 77 333 4445', whatsapp: '94773334445',
+    images: P('1567016432779-094069958ea5', '1560185127-6ed189bf02f4', '1595526114035-0d45ed16cfbf', '1502672260266-1c1ef2d93688'),
+    featured: false, verified: true, available: true, added: '2026-01-02'
+  }
+];

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register – BODIMA</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='85'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="register">
+
+  <main class="auth-shell">
+    <aside class="auth-panel">
+      <div class="auth-panel-inner">
+        <a class="logo" href="index.html">
+          <svg class="logo-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <rect x="1.5" y="1.5" width="45" height="45" rx="13" fill="#FF8A35"/>
+            <path d="M12 24.5 24 14l12 10.5V34a2.5 2.5 0 0 1-2.5 2.5h-19A2.5 2.5 0 0 1 12 34Z" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linejoin="round"/>
+            <path d="M24 31.6c-2.9-2.7-4.5-4.8-4.5-6.7a4.5 4.5 0 1 1 9 0c0 1.9-1.6 4-4.5 6.7Z" fill="#142B4A"/>
+            <circle cx="24" cy="24.6" r="1.7" fill="#FFFFFF"/>
+          </svg>
+          <span class="logo-text">BODIMA<span class="logo-dot">.</span></span>
+        </a>
+        <h2>Join Sri Lanka's stay community</h2>
+        <p class="lead">Whether you're searching for a place or listing one, BODIMA makes it simple.</p>
+        <ul class="auth-points">
+          <li><i class="fa-solid fa-user-graduate"></i> Students & tenants — save and compare places</li>
+          <li><i class="fa-solid fa-house-circle-check"></i> Owners — list properties for free</li>
+          <li><i class="fa-solid fa-lock-open"></i> No commissions or hidden charges</li>
+        </ul>
+      </div>
+    </aside>
+
+    <div class="auth-form-wrap">
+      <div class="auth-card">
+        <h1 class="auth-title">Create your account</h1>
+        <p class="auth-sub">Join as a tenant or a property owner</p>
+
+        <form id="registerForm" novalidate>
+          <div class="field">
+            <label>I am registering as</label>
+            <div class="type-cards">
+              <label class="type-card">
+                <input type="radio" name="regRole" value="tenant" checked>
+                <span class="tc-icon"><i class="fa-solid fa-user-graduate"></i></span>
+                <span class="tc-name">Student / Tenant</span>
+                <span class="tc-sub">Find & save places</span>
+              </label>
+              <label class="type-card">
+                <input type="radio" name="regRole" value="owner">
+                <span class="tc-icon"><i class="fa-solid fa-house-circle-check"></i></span>
+                <span class="tc-name">Property Owner</span>
+                <span class="tc-sub">List your places</span>
+              </label>
+            </div>
+          </div>
+          <div class="field">
+            <label for="regName">Full Name</label>
+            <input type="text" id="regName" placeholder="e.g. Kasun Perera">
+            <p class="field-msg">Please enter your full name.</p>
+          </div>
+          <div class="field">
+            <label for="regEmail">Email Address</label>
+            <input type="email" id="regEmail" placeholder="you@example.com">
+            <p class="field-msg">Please enter a valid email.</p>
+          </div>
+          <div class="field">
+            <label for="regPhone">Phone Number</label>
+            <input type="tel" id="regPhone" placeholder="077 123 4567">
+            <p class="field-msg">Enter a valid Sri Lankan mobile number.</p>
+          </div>
+          <div class="field">
+            <label for="regPassword">Password</label>
+            <div class="password-wrap">
+              <input type="password" id="regPassword" placeholder="Minimum 6 characters">
+              <button type="button" class="toggle-pw" data-target="regPassword" aria-label="Show password">
+                <i class="fa-regular fa-eye"></i></button>
+            </div>
+            <p class="field-msg">Password must be at least 6 characters.</p>
+          </div>
+          <div class="field">
+            <label for="regConfirm">Confirm Password</label>
+            <input type="password" id="regConfirm" placeholder="Repeat password">
+            <p class="field-msg">Passwords do not match.</p>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg">
+            Create Account <i class="fa-solid fa-user-plus"></i></button>
+
+          <p class="form-note"><i class="fa-solid fa-triangle-exclamation"></i> Demo only — accounts are stored in your browser's LocalStorage. Don't use a real password you use elsewhere.</p>
+          <p class="auth-alt">Already have an account? <a href="login.html">Login here</a></p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

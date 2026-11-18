@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post Your Property – BODIMA</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='85'%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="post">
+
+  <header id="siteHeader" class="site-header"></header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <ul class="breadcrumb">
+          <li><a href="index.html">Home</a></li>
+          <li>Post Your Property</li>
+        </ul>
+        <h1 id="pageHeroTitle">Post Your Property</h1>
+        <p id="postPageSub">List your boarding place, annex, hostel or apartment — it's completely free.</p>
+      </div>
+    </section>
+
+    <section class="section post-page" style="padding-top:0;">
+      <div class="container post-layout" style="margin-top:-46px; position:relative;">
+
+        <div class="form-card" id="formCard">
+          <form id="postForm" novalidate>
+            <!-- Property details -->
+            <h3 class="form-section-title"><i class="fa-solid fa-house-chimney"></i> Property Details</h3>
+            <div class="form-grid">
+              <div class="field span-2">
+                <label for="pTitle">Property Title *</label>
+                <input type="text" id="pTitle" placeholder="e.g. Sunshine Girls Boarding – Nugegoda">
+                <p class="field-msg">Title must be at least 6 characters.</p>
+              </div>
+              <div class="field">
+                <label for="pType">Accommodation Category *</label>
+                <select id="pType"></select>
+                <p class="field-msg">Please select a category.</p>
+              </div>
+              <div class="field">
+                <label for="pGender">Gender Preference</label>
+                <select id="pGender">
+                  <option value="Any">Mixed / Any</option>
+                  <option value="Male">Boys only</option>
+                  <option value="Female">Girls only</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Location -->
+            <h3 class="form-section-title"><i class="fa-solid fa-location-dot"></i> Location</h3>
+            <div class="form-grid">
+              <div class="field">
+                <label for="pDistrict">District *</label>
+                <select id="pDistrict"></select>
+                <p class="field-msg">Please select a district.</p>
+              </div>
+              <div class="field">
+                <label for="pCity">City *</label>
+                <select id="pCity"></select>
+                <p class="field-msg">Please select a city.</p>
+              </div>
+              <div class="field span-2">
+                <label for="pAddress">Full Address *</label>
+                <input type="text" id="pAddress" placeholder="No. 12, Temple Road, Nugegoda">
+                <p class="field-msg">Please enter the full street address.</p>
+              </div>
+            </div>
+
+            <!-- Pricing -->
+            <h3 class="form-section-title"><i class="fa-solid fa-wallet"></i> Pricing & Rooms</h3>
+            <div class="form-grid">
+              <div class="field">
+                <label for="pPrice">Monthly Price – LKR *</label>
+                <input type="number" id="pPrice" min="1000" placeholder="e.g. 15000">
+                <p class="field-msg">Enter between Rs 1,000 – Rs 500,000.</p>
+              </div>
+              <div class="field">
+                <label for="pRooms">Number of Rooms Available *</label>
+                <input type="number" id="pRooms" min="1" placeholder="e.g. 4">
+                <p class="field-msg">Enter between 1 – 50.</p>
+              </div>
+            </div>
+
+            <!-- Facilities -->
+            <h3 class="form-section-title"><i class="fa-solid fa-star"></i> Facilities</h3>
+            <div class="checkbox-grid" id="facilGrid"></div>
+
+            <!-- Description -->
+            <h3 class="form-section-title"><i class="fa-solid fa-align-left"></i> Description & Rules</h3>
+            <div class="form-grid">
+              <div class="field span-2">
+                <label for="pDesc">Property Description *</label>
+                <textarea id="pDesc" placeholder="Describe the place, its atmosphere, nearby landmarks, transport links…"></textarea>
+                <p class="field-msg">Please write at least 20 characters.</p>
+              </div>
+              <div class="field span-2">
+                <label for="pRules">Rules / Requirements (one per line)</label>
+                <textarea id="pRules" placeholder="Curfew at 10.30 PM&#10;No smoking&#10;Visitors allowed in common area"></textarea>
+              </div>
+            </div>
+
+            <!-- Images -->
+            <h3 class="form-section-title"><i class="fa-solid fa-camera"></i> Property Images</h3>
+            <label class="upload-box" for="pImages">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <span><strong>Click to upload images</strong><br>Up to 4 images · JPG/PNG · max 400 KB each</span>
+              <input type="file" id="pImages" class="visually-hidden" accept="image/*" multiple>
+            </label>
+            <div class="preview-grid" id="imagePreview"></div>
+            <p class="form-note">No images? We'll add sample photos for now — you can edit them later from your dashboard.</p>
+
+            <!-- Contact -->
+            <h3 class="form-section-title"><i class="fa-solid fa-address-card"></i> Owner Contact</h3>
+            <div class="form-grid">
+              <div class="field">
+                <label for="pOwner">Owner Name *</label>
+                <input type="text" id="pOwner" placeholder="e.g. Kamala Perera">
+                <p class="field-msg">Please enter the owner name.</p>
+              </div>
+              <div class="field">
+                <label for="pPhone">Contact Number *</label>
+                <input type="tel" id="pPhone" placeholder="077 123 4567">
+                <p class="field-msg">Enter a valid Sri Lankan mobile number.</p>
+              </div>
+              <div class="field">
+                <label for="pWhatsapp">WhatsApp Number</label>
+                <input type="tel" id="pWhatsapp" placeholder="Leave empty to use contact number">
+                <p class="field-msg">Enter a valid WhatsApp number.</p>
+              </div>
+              <div class="field">
+                <label for="pEmail">Email *</label>
+                <input type="email" id="pEmail" placeholder="you@example.com">
+                <p class="field-msg">Please enter a valid email.</p>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-block" id="postBtn">
+              <i class="fa-solid fa-paper-plane"></i> Submit Property</button>
+            <p class="form-note"><i class="fa-solid fa-circle-info"></i> Your listing will appear in the directory immediately, marked as <strong>Pending Approval</strong> until reviewed by the BODIMA team (moderation is simulated in this demo).</p>
+          </form>
+        </div>
+
+        <!-- Success panel -->
+        <div class="form-card success-panel" id="successPanel">
+          <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+          <h2>Property Submitted Successfully!</h2>
+          <p>Your listing has been saved and is now visible in the directory with a <strong>"Pending Approval"</strong> badge. Thank you for choosing BODIMA!</p>
+          <div class="success-actions" id="successActions"></div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer id="siteFooter" class="site-footer"></footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/post.js"></script>
+</body>
+</html>

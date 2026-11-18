@@ -1,0 +1,134 @@
+/* ============================================================
+   BODIMA – User Dashboard (profile, listings, saved, logout)
+   ============================================================ */
+(function () {
+  const session = getSession();
+  if (!session) {
+    showToast('Please login to view your dashboard.', 'info');
+    setTimeout(() => (location.href = 'login.html?next=dashboard.html'), 700);
+    return;
+  }
+
+  /* ----- Profile sidebar ----- */
+  qs('#dashProfile').innerHTML = `
+    <div class="avatar-xl">${initialsOf(session.name)}</div>
+    <div class="name">${escapeHTML(session.name)}</div>
+    <div class="mail">${escapeHTML(session.email)}</div>
+    <span class="badge badge-orange">${session.role === 'owner' ? 'Property Owner' : 'Student / Tenant'}</span>`;
+
+  /* ----- Tabs ----- */
+  const menuBtns = qsa('#dashMenu .menu-item:not([data-action])');
+  menuBtns.forEach(btn => btn.addEventListener('click', () => {
+    menuBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    qsa('.dash-section').forEach(s => s.classList.remove('active'));
+    qs('#tab-' + btn.dataset.tab).classList.add('active');
+  }));
+
+  function switchTab(name) {
+    menuBtns.find?.call(menuBtns, b => b.dataset.tab === name)?.click();
+    menuBtns.forEach(b => { if (b.dataset.tab === name) b.click(); });
+  }
+
+  /* ----- Profile tab ----- */
+  function renderProfile() {
+    const mine = getUserProperties().filter(p => p.ownerEmail === session.email);
+    const saved = getFavorites();
+    qs('#tab-profile').innerHTML = `
+      <div class="dash-head"><h2>Profile Overview</h2></div>
+      <div class="stat-cards">
+        <div class="stat-card"><div class="num">${mine.length}</div><div class="lbl">Properties Listed</div></div>
+        <div class="stat-card"><div class="num">${saved.length}</div><div class="lbl">Saved Places</div></div>
+        <div class="stat-card"><div class="num">${prettyDate(session.joined).split(' ').slice(1).join(' ')}</div><div class="lbl">Member Since</div></div>
+      </div>
+      <div class="profile-card">
+        <div class="profile-row"><span class="k">Full Name</span><span class="v">${escapeHTML(session.name)}</span></div>
+        <div class="profile-row"><span class="k">Email Address</span><span class="v">${escapeHTML(session.email)}</span></div>
+        <div class="profile-row"><span class="k">Phone Number</span><span class="v">${escapeHTML(session.phone || '—')}</span></div>
+        <div class="profile-row"><span class="k">Account Type</span><span class="v">${session.role === 'owner' ? 'Property Owner' : 'Student / Tenant'}</span></div>
+        <div class="profile-row"><span class="k">Member ID</span><span class="v">${escapeHTML(session.id)}</span></div>
+      </div>
+      <p class="form-note"><i class="fa-solid fa-shield-halved"></i> This is a frontend demo account stored in your browser's LocalStorage. It is not connected to any real backend and is not secure.</p>`;
+  }
+
+  /* ----- My Listings tab ----- */
+  function renderListings() {
+    const mine = getUserProperties().filter(p => p.ownerEmail === session.email);
+    qs('#listingsCount').textContent = mine.length;
+    const box = qs('#tab-listings');
+
+    if (!mine.length) {
+      box.innerHTML = `
+        <div class="dash-head"><h2>My Properties</h2>
+          <a href="post-property.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Post New Property</a></div>
+        <div class="empty-state show">
+          <div class="empty-icon"><i class="fa-solid fa-house-chimney-crack"></i></div>
+          <h3>No properties listed yet</h3>
+          <p>Have a boarding place, annex or room to rent? Reach thousands of searchers on BODIMA.</p>
+          <a href="post-property.html" class="btn btn-primary">Post Your First Property</a>
+        </div>`;
+      return;
+    }
+
+    box.innerHTML = `
+      <div class="dash-head"><h2>My Properties</h2>
+        <a href="post-property.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Post New Property</a></div>
+      <div class="notice-banner"><i class="fa-solid fa-circle-info"></i>
+        New listings stay marked as <strong>&nbsp;Pending Approval&nbsp;</strong> until reviewed (moderation is simulated in this demo).</div>
+      ${mine.map(p => `
+        <div class="my-listing-card">
+          <div class="listing-media"><img src="${p.images[0]}" alt="" onerror="imgFail(this)"></div>
+          <div class="listing-info">
+            <span class="badge badge-amber"><i class="fa-regular fa-clock"></i> Pending Approval</span>
+            <h4>${escapeHTML(p.title)}</h4>
+            <p class="prop-loc"><i class="fa-solid fa-location-dot"></i> ${escapeHTML(p.city)}, ${escapeHTML(p.district)}</p>
+            <div class="listing-meta">
+              <span><b>${formatLKR(p.price)}</b>/mo</span><span>·</span>
+              <span>${p.rooms} rooms</span><span>·</span>
+              <span>Added ${prettyDate(p.added)}</span>
+            </div>
+          </div>
+          <div class="listing-actions">
+            <a class="btn btn-outline btn-sm" href="property-details.html?id=${p.id}">View</a>
+            <a class="btn btn-navy btn-sm" href="post-property.html?edit=${p.id}"><i class="fa-solid fa-pen"></i> Edit</a>
+            <button class="btn btn-danger btn-sm" data-del="${p.id}"><i class="fa-solid fa-trash"></i> Delete</button>
+          </div>
+        </div>`).join('')}`;
+  }
+
+  /* ----- Delete listing ----- */
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('[data-del]');
+    if (!btn) return;
+    const id = btn.dataset.del;
+    if (!confirm('Delete this listing permanently? This cannot be undone.')) return;
+    saveUserProperties(getUserProperties().filter(p => p.id !== id));
+    showToast('Listing deleted.', 'info');
+    renderListings(); renderProfile();
+  });
+
+  /* ----- Saved properties tab ----- */
+  function renderSaved() {
+    const favs = getFavorites();
+    qs('#savedCount').textContent = favs.length;
+    const items = favs.map(getPropertyById).filter(Boolean);
+    qs('#tab-saved').innerHTML = `
+      <div class="dash-head"><h2>Saved Properties</h2></div>
+      ${items.length
+        ? `<div class="prop-grid">${items.map(renderPropCard).join('')}</div>`
+        : `<div class="empty-state show">
+             <div class="empty-icon"><i class="fa-regular fa-heart"></i></div>
+             <h3>No saved places yet</h3>
+             <p>Tap the heart icon on any listing to save it here for later.</p>
+             <a href="properties.html" class="btn btn-primary">Browse Properties</a>
+           </div>`}`;
+    initReveal(qs('#tab-saved'));
+  }
+
+  /* ----- Live refresh when favorites change ----- */
+  document.addEventListener('fav:change', () => {
+    renderProfile(); renderSaved();
+  });
+
+  renderProfile(); renderListings(); renderSaved();
+})();
